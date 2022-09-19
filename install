@@ -1,0 +1,29 @@
+#!/bin/bash
+
+help() {
+  echo "Usage:"
+  echo "  zmicro package install just <args...>"
+  echo ""
+}
+
+core() {
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    help
+    exit 0
+  fi
+
+  export PATH=/usr/local/bin:$PATH
+
+  which just >>/dev/null 2>&1
+  if [ "$?" != "0" ]; then
+    curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | sudo bash -s -- --to /usr/local/bin
+  fi
+
+  log::success "install just success."
+}
+
+run() {
+  core $@
+}
+
+run $@

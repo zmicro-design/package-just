@@ -1,0 +1,19 @@
+#!/bin/bash
+
+help() {
+  echo "Usage:"
+  echo "  zmicro just <args ...>"
+  echo ""
+}
+
+core() {
+  export PATH=/usr/local/bin:$PATH
+
+  just "$@"
+}
+
+run() {
+  core "$@"
+}
+
+run "$@"
